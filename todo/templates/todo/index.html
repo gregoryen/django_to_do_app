@@ -7,8 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="{% static 'todo/style.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'todo/style.css' %}">
 </head>
 
 <body class="index-background">
@@ -28,23 +28,29 @@
             <button class="btn btn-light" type="submit">Search</button>
         </form>
     </nav>
-
     <div class="container">
-        <div class="container">
-            <div class="card">
-                <div class="card-body">
-                    <form action="{% url 'todo:new_task' %}" method="post">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="input_task">Insert task !</label>
-                            <input type="text" class="form-control" id="input_task">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </form>
-            </div>
 
+        <div class="container">
+            <div class="card mt-2" >
+                <div class="card-body ml-5 mr-5">
+                    <form class="form-row mt-3" action="{% url 'todo:new_task' %}">
+                        {% csrf_token %}
+                        <div class="form-group col" style="text-align: center">
+                            <div class="mt-2">
+                                <b>Insert your task !</b>
+                            </div>
+                        </div>
+                        <div class="form-group col-7 ml-5 mr-5">
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group col">
+                            <button class="btn btn-primary btn-block">Add</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+
         <div class="container">
 
             {% block content %}
