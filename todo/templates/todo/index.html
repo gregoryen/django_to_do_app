@@ -1,10 +1,61 @@
-<!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>My todo app</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="{% static 'todo/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
-<body>
-    <h1>TO DO initial view !</h1>
+
+<body class="index-background">
+
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3390FF">
+
+        <a class="navbar-brand" href="/"><b>ToDo App</b></a>
+
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-light" type="submit">Search</button>
+        </form>
+    </nav>
+
+    <div class="container">
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <form action="{% url 'todo:new_task' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="input_task">Insert task !</label>
+                            <input type="text" class="form-control" id="input_task">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+            </div>
+
+            </div>
+        </div>
+        <div class="container">
+
+            {% block content %}
+
+            {% endblock content %}
+
+        </div>
+    </div>
+
+
+
 </body>
+
 </html>
