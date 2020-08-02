@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import ToDo
 
 # Create your views here.
@@ -24,13 +23,9 @@ def new_task(request):
 
     is_urgent = True if is_urgent_response == 'true' else False
 
-    # Tworze nowy wpis do bazy danych
-
     if task_text != "":
         todo_object = ToDo(text=task_text, is_urgent=is_urgent)
         todo_object.save()
-
-    # Pobieram list wpisow z bazy danych i tworze ich liste
 
     todos = ToDo.objects.filter()
     todos_for_front = prepare_todos_list(todos)
@@ -38,28 +33,31 @@ def new_task(request):
     context = {
         'todos': todos_for_front,
     }
-    # Stworzona liste zwracam
 
     return render(request, 'todo/new_task.html', context)
 
 
-def delete_task(request):
+def delete_task(request, todo_id):
 
-    # Wyszukuje i usuwam dany wpis
+    ToDo.objects.filter(id=todo_id).delete()
 
-    # Pobieram list wpisw z bazy danych i tworze ich liste
+    todos = ToDo.objects.filter()
+    todos_for_front = prepare_todos_list(todos)
 
-    # Zwracam stworzona liste
+    context = {
+        'todos': todos_for_front,
+    }
 
-    return render(request, 'todo/new_task.html')
+    return render(request, 'todo/new_task.html', context)
 
 
 def prepare_todos_list(todos):
     todos_for_front = []
 
     for todo in todos:
+        post_id = todo.id
         post_text = todo.text
         post_urgent = 'Task is urgent' if todo.is_urgent else 'Task is not urgent'
-        todos_for_front.append((post_text, post_urgent))
+        todos_for_front.append((post_text, post_urgent, post_id))
 
     return todos_for_front
