@@ -8,7 +8,6 @@ from .models import ToDo
 def home(request):
 
     todos = ToDo.objects.filter()
-
     todos_for_front = prepare_todos_list(todos)
 
     context = {
@@ -34,13 +33,11 @@ def new_task(request):
     # Pobieram list wpisow z bazy danych i tworze ich liste
 
     todos = ToDo.objects.filter()
-
     todos_for_front = prepare_todos_list(todos)
 
     context = {
         'todos': todos_for_front,
     }
-
     # Stworzona liste zwracam
 
     return render(request, 'todo/new_task.html', context)
