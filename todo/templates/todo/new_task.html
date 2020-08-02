@@ -1,15 +1,20 @@
 {% extends 'todo/index.html' %}
 
 {% block content %}
-    
+    {% for todo in todos %}
             <div class="card mt-2">
                 <div class="card-body mt-2 md-0 ml-5 mr-5">
                     <form class="form-row mt-3" action="{% url 'todo:new_task' %}">
                         {% csrf_token %}
                         <div class="form-group col-10" style="text-align: center">
                             <div class="mt-2" style="text-align: left">
-                                <span >Your task</span>
+                                <span >{{ todo.0 }}</span>
                             </div>
+                        </div>
+                        <div class="form-group col mt-2">
+                              <label class="form-check-label" for="defaultCheck1">
+                                {{ todo.1 }}
+                              </label>
                         </div>
                         <div class="form-group col-2">
                             <button class="btn btn-danger btn-block">X</button>
@@ -17,6 +22,8 @@
                     </form>
                 </div>
             </div>
+    {% endfor %}
+
 
 
 {% endblock content %}

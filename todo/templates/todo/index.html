@@ -33,15 +33,21 @@
         <div class="container">
             <div class="card mt-2">
                 <div class="card-body mt-2 md-0 ml-5 mr-5">
-                    <form class="form-row mt-3" action="{% url 'todo:new_task' %}">
+                    <form class="form-row mt-3" action="{% url 'todo:new_task' %}" method="post">
                         {% csrf_token %}
                         <div class="form-group col" style="text-align: center">
                             <div class="mt-2">
-                                <b>Insert your task !</b>
+                                <b>Insert task: </b>
                             </div>
                         </div>
-                        <div class="form-group col-7 ml-5 mr-5">
-                            <input type="text" class="form-control">
+                        <div class="form-group col-5 ml-5 mr-5">
+                            <input type="text" class="form-control" name="task_text">
+                        </div>
+                        <div class="form-group col mt-2">
+                              <input class="form-check-input" type="checkbox" value="true" name="is_urgent" id="defaultCheck1">
+                              <label class="form-check-label" for="defaultCheck1">
+                                is urgent
+                              </label>
                         </div>
                         <div class="form-group col">
                             <button class="btn btn-primary btn-block">Add</button>
